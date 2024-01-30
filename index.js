@@ -6,9 +6,14 @@ const { of } = require("rxjs");
 const questions= ()=>{
     return inquirer.prompt([
         {
-        type:Input;
-        name : Title;
-        Message:    Please enter your Project Title;
+        type: 'input ',
+        name : 'Title',
+        message: 'Please enter your Project Title :, 
+        }
+        {
+        type: 'input',
+         name :'Description',
+         message:'Please enter your Project Description:'       
         }
 
     ])
@@ -34,10 +39,10 @@ function init=()=> {
     question()
     .then(
         (answers)=>writeFile("README.md",generateREADME (answers)))
-    .then(()=>console.log("Successfully Generated README.md")
+    .then(()=>console.log("Successfully Generated README.md"))
     .catch((err)=>console.log("Error");    
     )
-}
+};
 
 // Function call to initialize app
 init();
