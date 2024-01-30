@@ -1,6 +1,5 @@
-// TODO: Create an array of questions for user input
 const inquirer = require("inquirer");
-const fs = require("fs");
+const fs = require("fs").promises;
 
 const questions = () => {
   return inquirer.prompt([
@@ -16,7 +15,7 @@ const questions = () => {
     },
     {
       type: "list",
-      name: "license",
+      name: "License",
       message: "Please select applicable license:",
       choices: [
         "MIT License",
@@ -43,7 +42,13 @@ const questions = () => {
     {},
   ]);
 };
-const generateREADME = ({}) =>
+const generateREADME = ({
+  Title,
+  Description,
+  License,
+  Github_Username,
+  Email,
+}) =>
   `#${Title}${license}
 ##${Description};
 ##${Table_contents};
@@ -56,10 +61,7 @@ const generateREADME = ({}) =>
     #### My Github Profile : https://github.com/${Github_Username};
     #### Please Reach me at: ${Email} for more queries and information;
 `;
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
 
-// TODO: Create a function to initialize app
 init = () => {
   question()
     .then((answers) => writeFile("README.md", generateREADME(answers)))
@@ -67,5 +69,4 @@ init = () => {
     .catch((err) => console.log("Error"));
 };
 
-// Function call to initialize app
 init();
