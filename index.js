@@ -32,7 +32,7 @@ const questions = () => {
     {
       type: "input",
       name: "Github_Username",
-      message: " Please Github Username",
+      message: " Please enter Github Username",
     },
     {
       type: "Email",
@@ -63,7 +63,7 @@ const generateREADME = ({
 `;
 
 init = () => {
-  question()
+  questions()
     .then((answers) => writeFile("README.md", generateREADME(answers)))
     .then(() => console.log("Successfully Generated README.md"))
     .catch((err) => console.log("Error"));
