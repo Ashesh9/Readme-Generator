@@ -1,8 +1,33 @@
 const inquirer = require("inquirer");
 const fs = require("fs").promises;
 
-const questions = () => {
-  return inquirer.prompt([
+const generateREADME = ({
+  Title,
+  Description,
+  License,
+  Github_Username,
+  Email,
+}) =>
+  `#${Title}${License}
+##${Description};
+##Table_contents
+#### Installation
+#### Usage
+####License
+#### Contributions
+#### Testing
+#### Questions;
+##${Installation};
+##${Usage};
+##${License};
+##${Contribution};
+##${Tests};
+##${Questions_Answers};
+    #### My Github Profile : https://github.com/${Github_Username};
+    #### Please Reach me at: ${Email} for more queries and information;
+`;
+inquirer
+  .prompt([
     {
       type: "input ",
       name: "Title",
@@ -39,34 +64,26 @@ const questions = () => {
       name: "Email",
       message: "Please enter your email address",
     },
-    {},
-  ]);
-};
-const generateREADME = ({
-  Title,
-  Description,
-  License,
-  Github_Username,
-  Email,
-}) =>
-  `#${Title}${license}
-##${Description};
-##${Table_contents};
-##${Installation};
-##${Usage};
-##${License};
-##${Contribution};
-##${Tests};
-##${Questions_Answers};
-    #### My Github Profile : https://github.com/${Github_Username};
-    #### Please Reach me at: ${Email} for more queries and information;
-`;
+    {
+      type: "input",
+      nmae: "Installation",
+      message: "Please enter Installation procedure:",
+    },
+    {
+      type: "input",
+      nmae: "Usage",
+      message: "Please enter Usage procedure:",
+    },
+    {
+      type: "input",
+      name: "Tasting Methods",
+      message: "Please enter Testing methods if any:",
+    },
+  ])
+  .then((answers) => {
+    const READMEContent = generateREADME(answers);
 
-init = () => {
-  questions()
-    .then((answers) => writeFile("README.md", generateREADME(answers)))
-    .then(() => console.log("Successfully Generated README.md"))
-    .catch((err) => console.log("Error"));
-};
-
-init();
+    fs.writeFile("README.md", generateREADME(answers))
+      .then(() => console.log("Successfully Generated README.md"))
+      .catch((err) => console.log("Error"));
+  });
