@@ -15,7 +15,7 @@ const questions = () => {
       message: "Please enter your Project Description:",
     },
     {
-      type: "checkbox",
+      type: "list",
       name: "license",
       message: "Please select applicable license:",
       choices: [
@@ -30,24 +30,37 @@ const questions = () => {
         "Unlicense",
       ],
     },
+    {
+      type: "input",
+      name: "Github_Username",
+      message: " Please Github Username",
+    },
+    {
+      type: "Email",
+      name: "Email",
+      message: "Please enter your email address",
+    },
+    {},
   ]);
 };
 const generateREADME = ({}) =>
   `#${Title}${license}
-##${Description}
-##${Table - contents}
-##${Installation}
-##${Usage}
-##${License}
-##${Contributing}
-##${Tests}
-##${Questions_Answers}
+##${Description};
+##${Table_contents};
+##${Installation};
+##${Usage};
+##${License};
+##${Contribution};
+##${Tests};
+##${Questions_Answers};
+    #### My Github Profile : https://github.com/${Github_Username};
+    #### Please Reach me at: ${Email} for more queries and information;
 `;
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {}
 
 // TODO: Create a function to initialize app
-const init = () => {
+init = () => {
   question()
     .then((answers) => writeFile("README.md", generateREADME(answers)))
     .then(() => console.log("Successfully Generated README.md"))
